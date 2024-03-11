@@ -1,0 +1,173 @@
+{
+  "Croquetas": {
+    "name": "Croquetas",
+    "ingredients": ["Jamón", "Pollo", "Sal", "Sazonador"],
+    "description": "Croquetas de cocido caseras",
+    "image": "img/a4.jpg"
+  },
+  "Doble Carne Pepinillo": {
+    "name": "Doble Carne Pepinillo",
+    "ingredients": [
+      "Queso",
+      "Ternera",
+      "Lechuga",
+      "Pepinillo",
+      "Ketchup",
+      "Mayonesa",
+      "Mostaza"
+    ],
+    "description": "Hamburguesa doble carne con pepinillo pinchado en el pan de la hamburguesa",
+    "image": "img/b1.jpeg"
+  },
+  "Carne y Bacon": {
+    "name": "Carne y Bacon",
+    "ingredients": ["Ternera", "Bacon", "Cheddar", "Ghouda", "Pan bizcocho"],
+    "description": "Burger tradicional americana con ternera de vacuno y doble de bacon",
+    "image": "img/b2.jpg"
+  },
+  "Carne y Huevo": {
+    "name": "Carne y Huevo",
+    "ingredients": [
+      "Ternera",
+      "Lechuga",
+      "Tomate",
+      "Huevo Frito",
+      "Cheddar",
+      "Ghouda"
+    ],
+    "description": "Burger con huevo frito, especialidad de la casa",
+    "image": "img/b3.jpg"
+  },
+  "Desmenuzada con cebolla": {
+    "name": "Desmenuzada con cebolla",
+    "ingredients": [
+      "Cerdo",
+      "Cebolla",
+      "Mayonesa",
+      "Lechuga",
+      "Cebolla caramelizada",
+      "Mostaza"
+    ],
+    "description": "Burger con cerdo desmenuzado, nuestra hamburguesa más artesana",
+    "image": "img/b4.jpg"
+  },
+  "Tiras de pollo": {
+    "name": "Tiras de pollo",
+    "ingredients": ["Pollo frito", "Pimienta negra", "Sal"],
+    "description": "Tiras de pollo tradicionales al estilo Kentucky",
+    "image": "img/a1.jpg"
+  },
+  "Fingers de pollo": {
+    "name": "Fingers de pollo",
+    "ingredients": ["Tiras de pollo", "Aceite", "Sazonador"],
+    "description": "Fingers de pollo americanos recién sacados de la freidora",
+    "image": "img/a2.jpg"
+  },
+  "Bravas españolas": {
+    "name": "Bravas españolas",
+    "ingredients": ["Patata", "Tabasco", "Tomate", "Sal"],
+    "description": "El acompañamiento más tradicional español",
+    "image": "img/a3.jpg"
+  },
+  "Helado casero": {
+    "name": "Helado casero",
+    "ingredients": ["Vainilla", "Azúcar", "Sirope de chocolate"],
+    "description": "Artesano y delicioso",
+    "image": "img/helado.jpg"
+  },
+  "Contesa": {
+    "name": "Contesa",
+    "ingredients": ["Nata", "Chocolate", "Azúcar"],
+    "description": "Postre tradicional español",
+    "image": "img/contesa.jpg"
+  },
+  "Natillas de la abuela": {
+    "name": "Natillas de la abuela",
+    "ingredients": [
+      "Leche",
+      "Canela",
+      "Vaina de vainilla",
+      "Yema de huevo",
+      "Azúcar",
+      "Galleta"
+    ],
+    "description": "Tradicional, casero y auténtico",
+    "image": "img/natillas.jpg"
+  },
+  "Arroz con leche": {
+    "name": "Arroz con leche",
+    "ingredients": [
+      "Leche",
+      "Azúcar",
+      "Corteza de naranja",
+      "Vainilla",
+      "Arroz",
+      "Canela"
+    ],
+    "description": "Postre al estilo Karlos Arguiñano",
+    "image": "img/arrozleche.jpg"
+  },
+  "Burger principales": {
+    "name": "Burger principales",
+    "description": "Hamburguesas especiales"
+  },
+  "Acompañamientos": {
+    "name": "Acompañamientos",
+    "description": "Acompañamientos increíbles"
+  },
+  "Postres": {
+    "name": "Postres",
+    "description": "Postres impresionantes"
+  },
+  "Lactosa": {
+    "name": "Lactosa"
+  },
+  "Gluten": {
+    "name": "Gluten"
+  },
+  "Soja": {
+    "name": "Soja"
+  },
+  "Futos Secos": {
+    "name": "Futos Secos"
+  },
+  "Classic Arthur Menu": {
+    "name": "Classic Arthur Menu"
+  },
+  "Funny Flavours": {
+    "name": "Funny Flavours"
+  },
+  "New and Old": {
+    "name": "New and Old"
+  },
+  "KAB Madrid": {
+    "name": "KAB Madrid",
+    "description": "KAB situado en Madrid, donde todo aquel que va con prisa, se para aquí.",
+    "location": {
+      "Coordinate": {
+        "latitude": "40.437842",
+        "longitude": "-3.686273"
+      }
+    }
+  },
+  "KAB Ciudad Real": {
+    "name": "KAB Ciudad Real",
+    "description": "KAB situado en Ciudad Real. Un soplo de aire fresco en una ciudad agricultora.",
+    "location": {
+      "Coordinate": {
+        "latitude": "38.98626",
+        "longitude": "-3.92907"
+      }
+    }
+  },
+  "KAB Parla": {
+    "name": "KAB Parla",
+    "description": "KAB situado en Parla. Nunca hay que olvidar los orígenes ni de donde venimos.",
+    "location": {
+      "Coordinate": {
+        "latitude": "40.23604",
+        "longitude": "-3.76752"
+      }
+    }
+  }
+}
