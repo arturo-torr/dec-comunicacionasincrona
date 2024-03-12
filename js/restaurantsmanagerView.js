@@ -603,6 +603,10 @@ class RestaurantsManagerView {
       "beforeend",
       '<li><hr class="dropdown-divider border--green1"></li><a id="queryFavourites" class="dropdown-item text--green fw-bold" href="#query-favourites">Consultar favoritos</a>'
     );
+    subContainer.insertAdjacentHTML(
+      "beforeend",
+      '<li><hr class="dropdown-divider border--green1"></li><a id="backup" class="dropdown-item text--green fw-bold" href="#do-backup">Realizar backup</a>'
+    );
 
     div.append(subContainer);
     // Inserta el menú de navegación creado
@@ -1421,7 +1425,7 @@ class RestaurantsManagerView {
 
     const container = document.createElement("div");
     container.classList.add("container", "my-3");
-    container.id = "remove-dish";
+    container.id = "query-favourites";
     container.insertAdjacentHTML(
       "afterbegin",
       `<h1 class="display-5 text--green mt-2">Platos favoritos de <u>${user.username}</u></h1>`
@@ -1453,6 +1457,55 @@ class RestaurantsManagerView {
   }
 
   /** -------------- FIN PRACTICA 8 -------------- */
+
+  // Muestra el botón necesario para realizar el volcado objetos
+  showBackupForm() {
+    // Realizamos la creación de las migas de pan, eliminando el atributo de aria-current al último elemento y también la fuente bold
+    let ol = this.breadcrumb.closest("ol");
+    ol.lastElementChild.removeAttribute("aria-current");
+    ol.lastElementChild.classList.remove("fw-bolder");
+    // Creamos un elemento con el nombre del plato y lo agrega a las migas de pan
+    let li = document.createElement("li");
+    li.classList.add("breadcrumb-item", "text--green", "fw-bolder");
+    li.textContent = "Realizar backup";
+    ol.appendChild(li);
+
+    this.centralzone.replaceChildren();
+    this.initzone.replaceChildren();
+
+    const container = document.createElement("div");
+    container.classList.add("container", "my-3");
+    container.id = "do-backup";
+    container.insertAdjacentHTML(
+      "afterbegin",
+      `<h1 class="display-5 text--green mt-4 mb-4">Copia de seguridad</u></h1>`
+    );
+
+    const row = document.createElement("div");
+    row.classList.add("row");
+    row.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="container w-50" style="min-height: 55vh;>
+        <div class="form_container">
+                <div class="mt-3 bg__grey border--green1 rounded p-3">
+                <p class="text--green">Tenga en cuenta de que la siguiente operación generará un fichero JSON en su servidor.
+                Por eso, de al botón solamente si está completamente seguro/a de querer realizar la copia de seguridad. Para más dudas,
+                consulte con el administrador de la página, y resolverá las dudas que puedan haberse generado en esta sección.</p>
+                <div class="d-flex justify-content-center">    
+                  <button id="bPost" class="btn btn--green fw-bold" type="submit">Realizar copia de seguridad</button>
+                </div>
+        </div>
+</div>`
+    );
+    container.append(row);
+    this.centralzone.append(container);
+  }
+
+  bindBackup(handler) {
+    document.getElementById("bPost").addEventListener("click", (event) => {
+      handler();
+    });
+  }
   /** ----------- INICIO MODALES -----------  */
 
   // Modal que se abre cuando se crea un plato, indicando si se ha creado o no correctamente.
@@ -1885,7 +1938,8 @@ class RestaurantsManagerView {
     hUpdAssign,
     hUpdAllergen,
     hChangePositions,
-    hQueryFavourites
+    hQueryFavourites,
+    hBackUp
   ) {
     const newDishLink = document.getElementById("newDish");
     newDishLink.addEventListener("click", (event) => {
@@ -1985,7 +2039,18 @@ class RestaurantsManagerView {
         [],
         "#query-favourites",
         { action: "queryFavourites" },
-        "#",
+        "#query-favourites",
+        event
+      );
+    });
+    const backupLink = document.getElementById("backup");
+    backupLink.addEventListener("click", (event) => {
+      this[EXECUTE_HANDLER](
+        hBackUp,
+        [],
+        "#do-backup",
+        { action: "backup" },
+        "#do-backup",
         event
       );
     });
