@@ -14,8 +14,7 @@ import { getCookie } from "./utils.js";
 // Modelo y vista como constantes privadas
 const MODEL = Symbol("RestaurantsManagerModel");
 const VIEW = Symbol("RestaurantsManagerView");
-// Se instanciarán aquí los objetos que nos hagan falta para una carga inicial de datos
-const LOAD_MANAGER_OBJECTS = Symbol("Load Manager Objects");
+
 // Symbol para autenticación y usuario
 const AUTH = Symbol("AUTH");
 const USER = Symbol("USER");
@@ -28,273 +27,254 @@ class RestaurantsManagerController {
     this[USER] = null;
 
     this.onLoad();
-    this.onInit();
-    this[VIEW].bindInit(this.handleInit);
-  }
-
-  [LOAD_MANAGER_OBJECTS]() {
-    // Creación de categorías
-    const cat1 = this[MODEL].createCategory(
-      "Burger principales",
-      RestaurantsManager.Category
-    );
-    cat1.description = "Hamburguesas especiales";
-
-    const cat2 = this[MODEL].createCategory(
-      "Acompañamientos",
-      RestaurantsManager.Category
-    );
-    cat2.description = "Acompañamientos increíbles";
-
-    const cat3 = this[MODEL].createCategory(
-      "Postres",
-      RestaurantsManager.Category
-    );
-    cat3.description = "Postres impresionantes";
-
-    // Creación de platos
-    let dish1 = this[MODEL].createDish("Croquetas", RestaurantsManager.Dish);
-    dish1.ingredients = ["Jamón", "Pollo", "Sal", "Sazonador"];
-    dish1.description = "Croquetas de cocido caseras";
-    dish1.image = "img/a4.jpg";
-
-    let dish2 = this[MODEL].createDish(
-      "Doble Carne Pepinillo",
-      RestaurantsManager.Dish
-    );
-    dish2.ingredients = [
-      "Queso",
-      "Ternera",
-      "Lechuga",
-      "Pepinillo",
-      "Ketchup",
-      "Mayonesa",
-      "Mostaza",
-    ];
-    dish2.description =
-      "Hamburguesa doble carne con pepinillo pinchado en el pan de la hamburguesa";
-    dish2.image = "img/b1.jpeg";
-
-    let dish3 = this[MODEL].createDish(
-      "Carne y Bacon",
-      RestaurantsManager.Dish
-    );
-    dish3.ingredients = [
-      "Ternera",
-      "Bacon",
-      "Cheddar",
-      "Ghouda",
-      "Pan bizcocho",
-    ];
-    dish3.description =
-      "Burger tradicional americana con ternera de vacuno y doble de bacon";
-    dish3.image = "img/b2.jpg";
-
-    let dish4 = this[MODEL].createDish(
-      "Carne y Huevo",
-      RestaurantsManager.Dish
-    );
-    dish4.ingredients = [
-      "Ternera",
-      "Lechuga",
-      "Tomate",
-      "Huevo Frito",
-      "Cheddar",
-      "Ghouda",
-    ];
-    dish4.description = "Burger con huevo frito, especialidad de la casa";
-    dish4.image = "img/b3.jpg";
-
-    let dish5 = this[MODEL].createDish(
-      "Desmenuzada con cebolla",
-      RestaurantsManager.Dish
-    );
-    dish5.ingredients = [
-      "Cerdo",
-      "Cebolla",
-      "Mayonesa",
-      "Lechuga",
-      "Cebolla caramelizada",
-      "Mostaza",
-    ];
-    dish5.description =
-      "Burger con cerdo desmenuzado, nuestra hamburguesa más artesana";
-    dish5.image = "img/b4.jpg";
-
-    let dish6 = this[MODEL].createDish(
-      "Tiras de pollo",
-      RestaurantsManager.Dish
-    );
-    dish6.ingredients = ["Pollo frito", "Pimienta negra", "Sal"];
-    dish6.description = "Tiras de pollo tradicionales al estilo Kentucky";
-    dish6.image = "img/a1.jpg";
-
-    let dish7 = this[MODEL].createDish(
-      "Fingers de pollo",
-      RestaurantsManager.Dish
-    );
-    dish7.ingredients = ["Tiras de pollo", "Aceite", "Sazonador"];
-    dish7.description =
-      "Fingers de pollo americanos recién sacados de la freidora";
-    dish7.image = "img/a2.jpg";
-
-    let dish8 = this[MODEL].createDish(
-      "Bravas españolas",
-      RestaurantsManager.Dish
-    );
-    dish8.ingredients = ["Patata", "Tabasco", "Tomate", "Sal"];
-    dish8.description = "El acompañamiento más tradicional español";
-    dish8.image = "img/a3.jpg";
-
-    let dish9 = this[MODEL].createDish(
-      "Helado casero",
-      RestaurantsManager.Dish
-    );
-    dish9.ingredients = ["Vainilla", "Azúcar", "Sirope de chocolate"];
-    dish9.description = "Artesano y delicioso";
-    dish9.image = "img/helado.jpg";
-
-    let dish10 = this[MODEL].createDish("Contesa", RestaurantsManager.Dish);
-    dish10.ingredients = ["Nata", "Chocolate", "Azúcar"];
-    dish10.description = "Postre tradicional español";
-    dish10.image = "img/contesa.jpg";
-
-    let dish11 = this[MODEL].createDish(
-      "Natillas de la abuela",
-      RestaurantsManager.Dish
-    );
-    dish11.ingredients = [
-      "Leche",
-      "Canela",
-      "Vaina de vainilla",
-      "Yema de huevo",
-      "Azúcar",
-      "Galleta",
-    ];
-    dish11.description = "Tradicional, casero y auténtico";
-    dish11.image = "img/natillas.jpg";
-
-    let dish12 = this[MODEL].createDish(
-      "Arroz con leche",
-      RestaurantsManager.Dish
-    );
-    dish12.ingredients = [
-      "Leche",
-      "Azúcar",
-      "Corteza de naranja",
-      "Vainilla",
-      "Arroz",
-      "Canela",
-    ];
-    dish12.description = "Postre al estilo Karlos Arguiñano";
-    dish12.image = "img/arrozleche.jpg";
-
-    // Creación de alérgenos
-    let all1 = this[MODEL].createAllergen(
-      "Lactosa",
-      RestaurantsManager.Allergen
-    );
-    let all2 = this[MODEL].createAllergen(
-      "Gluten",
-      RestaurantsManager.Allergen
-    );
-    let all3 = this[MODEL].createAllergen("Soja", RestaurantsManager.Allergen);
-    let all4 = this[MODEL].createAllergen(
-      "Frutos Secos",
-      RestaurantsManager.Allergen
-    );
-
-    this[MODEL].addAllergen(all1, all2, all3, all4);
-    this[MODEL].assignAllergenToDish(
-      all1,
-      dish11,
-      dish12,
-      dish10,
-      dish9,
-      dish4,
-      dish3,
-      dish2
-    );
-
-    this[MODEL].assignAllergenToDish(all2, dish3, dish4, dish5, dish7, dish10);
-    this[MODEL].assignAllergenToDish(all3, dish5, dish6, dish7);
-    this[MODEL].assignAllergenToDish(all4, dish2, dish3, dish4);
-
-    // Creación de menús
-    let menu1 = this[MODEL].createMenu(
-      "Classic Arthur Menu",
-      RestaurantsManager.Menu
-    );
-    let menu2 = this[MODEL].createMenu(
-      "Funny Flavours",
-      RestaurantsManager.Menu
-    );
-    let menu3 = this[MODEL].createMenu("New and Old", RestaurantsManager.Menu);
-
-    // Asignación de platos a categorías y menús
-    this[MODEL].assignCategoryToDish(cat1, dish2, dish3, dish4, dish5);
-    this[MODEL].assignCategoryToDish(cat2, dish1, dish6, dish7, dish8);
-    this[MODEL].assignCategoryToDish(cat3, dish9, dish10, dish11, dish12);
-
-    this[MODEL].assignDishToMenu(menu1, dish2, dish1, dish9);
-    this[MODEL].assignDishToMenu(menu2, dish3, dish6, dish10);
-    this[MODEL].assignDishToMenu(menu3, dish4, dish7, dish11);
-
-    // Creación de restaurantes
-    let res1 = this[MODEL].createRestaurant(
-      "KAB Madrid",
-      RestaurantsManager.Restaurant
-    );
-    res1.description =
-      "KAB situado en Madrid, donde todo aquel que va con prisa, se para aquí.";
-    res1.location = new Coordinate("40.437842", "-3.686273");
-
-    let res2 = this[MODEL].createRestaurant(
-      "KAB Ciudad Real",
-      RestaurantsManager.Restaurant
-    );
-    res2.description =
-      "KAB situado en Ciudad Real. Un soplo de aire fresco en una ciudad agricultora.";
-    res2.location = new Coordinate("38.98626", "-3.92907");
-
-    let res3 = this[MODEL].createRestaurant(
-      "KAB Parla",
-      RestaurantsManager.Restaurant
-    );
-    res3.description =
-      "KAB situado en Parla. Nunca hay que olvidar los orígenes ni de donde venimos.";
-    res3.location = new Coordinate("40.23604", "-3.76752");
-
-    this[MODEL].addRestaurant(res1, res2, res3);
   }
 
   // Funciones que solo se ejecutan una sola vez
   onLoad = () => {
-    this[LOAD_MANAGER_OBJECTS]();
-    this.onAddCategory();
-    this.onAddAllergen();
-    this.onAddMenu();
-    this.onAddRestaurant();
-    this.onAddClose();
+    fetch("../data/objects.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const all1 = this[MODEL].createAllergen(
+          data["all1"].name,
+          RestaurantsManager.Allergen
+        );
+        const all2 = this[MODEL].createAllergen(
+          data["all2"].name,
+          RestaurantsManager.Allergen
+        );
+        const all3 = this[MODEL].createAllergen(
+          data["all3"].name,
+          RestaurantsManager.Allergen
+        );
+        const all4 = this[MODEL].createAllergen(
+          data["all4"].name,
+          RestaurantsManager.Allergen
+        );
+        const cat1 = this[MODEL].createCategory(
+          data["cat1"].name,
+          RestaurantsManager.Category
+        );
+        cat1.description = data["cat1"].description;
 
-    // Busca si hemos aceptado el mensaje de cookies, es decir, hay una cookie creada
-    if (getCookie("acceptedCookieMessage") !== "true") {
-      this[VIEW].showCookiesMessage();
-    }
+        const cat2 = this[MODEL].createCategory(
+          data["cat2"].name,
+          RestaurantsManager.Category
+        );
+        cat2.description = data["cat2"].description;
+        const cat3 = this[MODEL].createCategory(
+          data["cat3"].name,
+          RestaurantsManager.Category
+        );
+        cat3.description = data["cat3"].description;
 
-    // Recupera si hay un usuario que ha mantenido la sesión
-    const userCookie = getCookie("activeUser");
-    // Si existe, recibe el usuario
-    if (userCookie) {
-      const user = this[AUTH].getUser(userCookie);
-      // Asigna el usuario y abre una sesión con ese usuario
-      if (user) {
-        this[USER] = user;
-        this.onOpenSession();
-      }
-    } else {
-      this.onCloseSession();
-    }
+        const dish1 = this[MODEL].createDish(
+          data["dish1"].name,
+          RestaurantsManager.Dish
+        );
+        dish1.ingredients = data["dish1"].ingredients;
+        dish1.description = data["dish1"].description;
+        dish1.image = data["dish1"].image;
+
+        const dish2 = this[MODEL].createDish(
+          data["dish2"].name,
+          RestaurantsManager.Dish
+        );
+        dish2.ingredients = data["dish2"].ingredients;
+        dish2.description = data["dish2"].description;
+        dish2.image = data["dish2"].image;
+
+        const dish3 = this[MODEL].createDish(
+          data["dish3"].name,
+          RestaurantsManager.Dish
+        );
+        dish3.ingredients = data["dish3"].ingredients;
+        dish3.description = data["dish3"].description;
+        dish3.image = data["dish3"].image;
+
+        const dish4 = this[MODEL].createDish(
+          data["dish4"].name,
+          RestaurantsManager.Dish
+        );
+        dish4.ingredients = data["dish4"].ingredients;
+        dish4.description = data["dish4"].description;
+        dish4.image = data["dish4"].image;
+
+        const dish5 = this[MODEL].createDish(
+          data["dish5"].name,
+          RestaurantsManager.Dish
+        );
+        dish5.ingredients = data["dish5"].ingredients;
+        dish5.description = data["dish5"].description;
+        dish5.image = data["dish5"].image;
+
+        const dish6 = this[MODEL].createDish(
+          data["dish6"].name,
+          RestaurantsManager.Dish
+        );
+        dish6.ingredients = data["dish6"].ingredients;
+        dish6.description = data["dish6"].description;
+        dish6.image = data["dish6"].image;
+
+        const dish7 = this[MODEL].createDish(
+          data["dish7"].name,
+          RestaurantsManager.Dish
+        );
+        dish7.ingredients = data["dish7"].ingredients;
+        dish7.description = data["dish7"].description;
+        dish7.image = data["dish7"].image;
+
+        const dish8 = this[MODEL].createDish(
+          data["dish8"].name,
+          RestaurantsManager.Dish
+        );
+        dish8.ingredients = data["dish8"].ingredients;
+        dish8.description = data["dish8"].description;
+        dish8.image = data["dish8"].image;
+
+        const dish9 = this[MODEL].createDish(
+          data["dish9"].name,
+          RestaurantsManager.Dish
+        );
+        dish9.ingredients = data["dish9"].ingredients;
+        dish9.description = data["dish9"].description;
+        dish9.image = data["dish9"].image;
+
+        const dish10 = this[MODEL].createDish(
+          data["dish10"].name,
+          RestaurantsManager.Dish
+        );
+        dish10.ingredients = data["dish10"].ingredients;
+        dish10.description = data["dish10"].description;
+        dish10.image = data["dish10"].image;
+
+        const dish11 = this[MODEL].createDish(
+          data["dish11"].name,
+          RestaurantsManager.Dish
+        );
+        dish11.ingredients = data["dish11"].ingredients;
+        dish11.description = data["dish11"].description;
+        dish11.image = data["dish11"].image;
+
+        const dish12 = this[MODEL].createDish(
+          data["dish12"].name,
+          RestaurantsManager.Dish
+        );
+        dish12.ingredients = data["dish12"].ingredients;
+        dish12.description = data["dish12"].description;
+        dish12.image = data["dish12"].image;
+
+        this[MODEL].addAllergen(all1, all2, all3, all4);
+        this[MODEL].assignAllergenToDish(
+          all1,
+          dish11,
+          dish12,
+          dish10,
+          dish9,
+          dish4,
+          dish3,
+          dish2
+        );
+        this[MODEL].assignAllergenToDish(
+          all2,
+          dish3,
+          dish4,
+          dish5,
+          dish7,
+          dish10
+        );
+        this[MODEL].assignAllergenToDish(all3, dish5, dish6, dish7);
+        this[MODEL].assignAllergenToDish(all4, dish2, dish3, dish4);
+        // Creación de menús
+        let menu1 = this[MODEL].createMenu(
+          data["menu1"].name,
+          RestaurantsManager.Menu
+        );
+        let menu2 = this[MODEL].createMenu(
+          data["menu2"].name,
+          RestaurantsManager.Menu
+        );
+        let menu3 = this[MODEL].createMenu(
+          data["menu3"].name,
+          RestaurantsManager.Menu
+        );
+
+        // Asignación de platos a categorías y menús
+        this[MODEL].assignCategoryToDish(cat1, dish2, dish3, dish4, dish5);
+        this[MODEL].assignCategoryToDish(cat2, dish1, dish6, dish7, dish8);
+        this[MODEL].assignCategoryToDish(cat3, dish9, dish10, dish11, dish12);
+        this[MODEL].assignDishToMenu(menu1, dish2, dish1, dish9);
+        this[MODEL].assignDishToMenu(menu2, dish3, dish6, dish10);
+        this[MODEL].assignDishToMenu(menu3, dish4, dish7, dish11);
+        // Creación de restaurantes
+        let res1 = this[MODEL].createRestaurant(
+          data["res1"].name,
+          RestaurantsManager.Restaurant
+        );
+        res1.description = data["res1"].description;
+        res1.location = new Coordinate(
+          data["res1"].location.Coordinate.latitude,
+          data["res1"].location.Coordinate.longitude
+        );
+
+        let res2 = this[MODEL].createRestaurant(
+          data["res2"].name,
+          RestaurantsManager.Restaurant
+        );
+        res2.description = data["res2"].description;
+        res2.location = new Coordinate(
+          data["res2"].location.Coordinate.latitude,
+          data["res2"].location.Coordinate.longitude
+        );
+        let res3 = this[MODEL].createRestaurant(
+          data["res3"].name,
+          RestaurantsManager.Restaurant
+        );
+        res3.description = data["res3"].description;
+        res3.location = new Coordinate(
+          data["res3"].location.Coordinate.latitude,
+          data["res3"].location.Coordinate.longitude
+        );
+        this[MODEL].addRestaurant(res1, res2, res3);
+      })
+      .then(() => {
+        this.onInit();
+        this[VIEW].bindInit(this.handleInit);
+        this.onAddCategory();
+        this.onAddCategory();
+        this.onAddAllergen();
+        this.onAddMenu();
+        this.onAddRestaurant();
+        this.onAddClose();
+
+        // Busca si hemos aceptado el mensaje de cookies, es decir, hay una cookie creada
+        if (getCookie("acceptedCookieMessage") !== "true") {
+          this[VIEW].showCookiesMessage();
+        }
+
+        // Recupera si hay un usuario que ha mantenido la sesión
+        const userCookie = getCookie("activeUser");
+        // Si existe, recibe el usuario
+        if (userCookie) {
+          const user = this[AUTH].getUser(userCookie);
+          // Asigna el usuario y abre una sesión con ese usuario
+          if (user) {
+            this[USER] = user;
+            this.onOpenSession();
+          }
+        } else {
+          this.onCloseSession();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // El load manager objects desaparece por el fetch
+
+    // Segunda parte
+    // //fetch(./data./objects.json, {
+    // method: 'post',
+    // body: formdata
+    // }
   };
 
   // Funciones que se ejecutan al clickear inicio
