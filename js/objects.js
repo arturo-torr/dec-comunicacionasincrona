@@ -166,6 +166,13 @@ class Category {
       "Category name: " + this.#name + ", Description: " + this.#description
     );
   }
+
+  toJSON() {
+    return {
+      name: this.#name,
+      description: this.#description,
+    };
+  }
 }
 
 // Objeto que representa los alérgenos que puede tener un determinado plato
@@ -215,6 +222,13 @@ class Allergen {
       "Allergen name: " + this.#name + ", Description: " + this.#description
     );
   }
+
+  toJSON() {
+    return {
+      name: this.#name,
+      description: this.#description,
+    };
+  }
 }
 
 // Objeto que representa el menú que tendrá el restaurante
@@ -261,6 +275,13 @@ class Menu {
   // Imprime por pantalla las propiedades del objeto Menu
   toString() {
     return "Menu name: " + this.#name + ", Description: " + this.#description;
+  }
+
+  toJSON() {
+    return {
+      name: this.#name,
+      description: this.#description,
+    };
   }
 }
 
@@ -330,6 +351,14 @@ class Restaurant {
       this.#location
     );
   }
+
+  toJSON() {
+    return {
+      name: this.#name,
+      description: this.#description,
+      location: this.#location ? this.#location.toJSON() : null,
+    };
+  }
 }
 
 // Objeto Coordinate para definir coordenadas.
@@ -372,6 +401,13 @@ class Coordinate {
 
   toString() {
     return "Latitude: " + this.#latitude + " Longitude: " + this.#longitude;
+  }
+
+  toJSON() {
+    return {
+      latitude: this.#latitude,
+      longitude: this.#longitude,
+    };
   }
 }
 

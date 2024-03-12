@@ -31,7 +31,7 @@ class RestaurantsManagerController {
 
   // Funciones que solo se ejecutan una sola vez
   onLoad = () => {
-    fetch("../data/objects.json")
+    fetch("localhost/../data/objects.json")
       .then((response) => response.json())
       .then((data) => {
         const all1 = this[MODEL].createAllergen(
@@ -268,13 +268,6 @@ class RestaurantsManagerController {
       .catch((error) => {
         console.log(error);
       });
-    // El load manager objects desaparece por el fetch
-
-    // Segunda parte
-    // //fetch(./data./objects.json, {
-    // method: 'post',
-    // body: formdata
-    // }
   };
 
   // Funciones que se ejecutan al clickear inicio
@@ -339,7 +332,8 @@ class RestaurantsManagerController {
       this.handleUpdAssignForm,
       this.handleUpdAllergenForm,
       this.handleChangePositionsForm,
-      this.handleQueryFavourites
+      this.handleQueryFavourites,
+      this.handleBackup
     );
   }
 
@@ -399,11 +393,72 @@ class RestaurantsManagerController {
     }
   };
 
+  // Manejador que muestra los platos favoritos de un usuario
   handleQueryFavourites = () => {
     this[VIEW].showFavouritesDishes(this[MODEL].dishes, this[USER]);
   };
 
-  /** ----------------- FIN PRACTICA 8 -------------- */
+  // Manejador que muestra el formulario de backup
+  handleBackup = () => {
+    this[VIEW].showBackupForm();
+    this[VIEW].bindBackup(this.handleBackUpToJSON);
+  };
+
+  // Manejador que gestiona la promesa para crear un fichero JSON de backup
+  handleBackUpToJSON = () => {
+    let formData = new FormData();
+
+    // Objetos literales que llevarán individualmente las categorías, alérgenos... y sus propiedades
+    const allCategories = {};
+    const allAllergens = {};
+    const allDishes = {};
+    const allMenus = {};
+    const allRestaurants = {};
+
+    // Recorre las categorías y en el objeto literal crea un clave-valor con el Nombre y el JSON correspondiente
+    for (const category of this[MODEL].categories) {
+      allCategories[category.category.name] = category.category.toJSON();
+    }
+    // Recorre los alérgenos y en el objeto literal crea un clave-valor con el Nombre y el JSON correspondiente
+    for (const all of this[MODEL].allergens) {
+      allAllergens[all.allergen.name] = all.allergen.toJSON();
+    }
+    // Recorre los menús y en el objeto literal crea un clave-valor con el Nombre y el JSON correspondiente
+    for (const menu of this[MODEL].menus) {
+      allMenus[menu.menu.name] = menu.menu.toJSON();
+    }
+    // Recorre los platos y en el objeto literal crea un clave-valor con el Nombre y el JSON correspondiente
+    for (const dish of this[MODEL].dishes) {
+      allDishes[dish.dish.name] = dish.dish.toJSON();
+    }
+
+    // Recorre los restaurantes y en el objeto literal crea un clave-valor con el Nombre y el JSON correspondiente
+    for (const rest of this[MODEL].restaurants) {
+      allRestaurants[rest.restaurant.name] = rest.restaurant.toJSON();
+    }
+
+    // Agregación de los arrays con los objetos obtenidos al FormData
+    formData.append("jsonCategories", JSON.stringify(allCategories));
+    formData.append("jsonAllergens", JSON.stringify(allAllergens));
+    formData.append("jsonMenus", JSON.stringify(allMenus));
+    formData.append("jsonDishes", JSON.stringify(allDishes));
+    formData.append("jsonRestaurants", JSON.stringify(allRestaurants));
+
+    // Realización de la comunicación asíncrona llamando al php que gestiona los arrays para poder crear el JSON
+    fetch("backupaction.php", {
+      method: "post",
+      body: formData,
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+      })
+      .catch(function (err) {
+        console.error("Error al procesar la respuesta:", err);
+      });
+  };
 
   // Manejador que permite cerrar la ventana y eliminarlo de las referencias guardadas
   handleCloseWindowsInMenu = (window, dish) => {
