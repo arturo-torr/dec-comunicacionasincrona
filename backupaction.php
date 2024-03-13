@@ -16,11 +16,11 @@ $dataArrayRestaurants = json_decode($jsonDataRestaurants, true);
 
 // Almacenamos todos los datos en un array asociativo
 $allData = array(
-    'categories' => $dataArrayCategories,
-    'allergens' => $dataArrayAllergens,
-    'menus' => $dataArrayMenus,
-    'dishes' => $dataArrayDishes,
-    'restaurants' => $dataArrayRestaurants,
+    'Categories' => $dataArrayCategories,
+    'Allergens' => $dataArrayAllergens,
+    'Menus' => $dataArrayMenus,
+    'Dishes' => $dataArrayDishes,
+    'Restaurants' => $dataArrayRestaurants,
 );
 
 // Obtener la fecha actual en día - mes- año - Hora - minutos
